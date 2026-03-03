@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 1: Gravitational Constant — FP Capstone</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-home">FP Capstone</a>
+    <div class="nav-links">
+      <a href="index.html">Overview</a>
+      <a href="framework.html">Framework</a>
+      <a href="lab1.html" class="active">Lab 1: Gravity</a>
+      <a href="lab2.html">Lab 2: Positronium</a>
+      <a href="lab3.html">Lab 3: Z&#x2070;</a>
+      <a href="lab4.html">Lab 4: Synthesis</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="page-header">
+    <h1>Lab 1: The Gravitational Constant and Yukawa Deviations<span class="subtitle">Static limit of the mediator propagator</span></h1>
+    <div class="meta"><span>Mode: Experimental + Numerical</span><span>Regime: |q| &#x226A; m<sub>&#x3D5;</sub></span></div>
+    <div class="endorsement">Learning phase &#x2014; formative feedback only</div>
+  </div>
+
+  <h2>Learning Objectives</h2>
+  <ol>
+    <li>Derive the torsion-balance sensitivity function from first principles.</li>
+    <li>Measure the torsion constant and extract <em>G</em> with a complete uncertainty budget.</li>
+    <li>Implement a Yukawa-modified gravitational potential in simulation.</li>
+    <li>Perform two-model comparison (Newton vs Newton+Yukawa) using likelihood-ratio methods.</li>
+    <li>Translate exclusion limits in (&#x3B1;, &#x3BB;) space into mediator-mass constraints.</li>
+  </ol>
+
+  <h2>Three-Step Protocol</h2>
+  <table>
+    <thead><tr><th>Step</th><th>For this lab</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Entrance Session</strong></td><td>Present the torsion-balance physics, the Yukawa modification, and the connection to mediator mass. Explain what you will measure, why, and how. Be prepared to derive &#x3C4;<sub>grav</sub> for the mass geometry.</td></tr>
+      <tr><td><strong>Active Lab</strong></td><td>Measure &#x3BA; and extract <em>G</em>. Run in-lab estimates to catch systematic problems early. Record everything in your lab notes. Begin the numerical simulation alongside data-taking.</td></tr>
+      <tr><td><strong>Findings Session</strong></td><td>Present your extracted <em>G</em> with uncertainties, the systematic budget, the exclusion curve, and the likelihood-ratio result from the synthetic data. Discuss what worked, what didn&#x2019;t, and what remains unresolved.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Background</h2>
+  <h3>The Torsion Balance</h3>
+  <p>The torsion balance measures the gravitational torque between test masses and source masses suspended from a thin fibre. The equilibrium deflection angle &#x3B8; relates to the gravitational constant through:</p>
+  <div class="equation">&#x3B8; = &#x3C4;<sub>grav</sub> / &#x3BA;</div>
+  <p>where &#x3BA; is the torsion constant and &#x3C4;<sub>grav</sub> depends on <em>G</em>, the mass geometry, and the separation distance. You must derive &#x3C4;<sub>grav</sub> for the specific mass configuration in the laboratory, accounting for finite-size corrections.</p>
+
+  <h3>The Yukawa Modification</h3>
+  <p>A massive scalar mediator modifies the Newtonian potential:</p>
+  <div class="equation">V(r) = &#x2212;(G m&#x2081; m&#x2082; / r) [1 + &#x3B1; exp(&#x2212;r/&#x3BB;)]</div>
+  <p>where &#x3BB; = &#x210F;/(m<sub>&#x3D5;</sub>c) is the Compton wavelength and &#x3B1; characterises the coupling strength relative to gravity. This follows directly from Fourier-transforming the static-limit propagator (see <a href="framework.html">Framework, &#xA7;2</a>). Deriving this connection is your <strong>first quantitative exercise</strong>.</p>
+  <div class="box box-guardian">
+    <div class="box-label">Important</div>
+    <p style="margin-bottom:0">The Yukawa form is one specific phenomenological parametrisation. Different BSM scenarios (ADD extra dimensions, chameleon fields, massive graviton theories) predict different functional forms. Treat V(r) as a working tool for setting constraints &#x2014; not as a fundamental law. The model-comparison extension below requires you to confront this directly.</p>
+  </div>
+
+  <h3>Connecting to High-Energy Scales</h3>
+  <p>The length scale &#x3BB; corresponds to a mediator mass via m<sub>&#x3D5;</sub> = &#x210F;/(&#x3BB;c). Representative values:</p>
+  <table>
+    <thead><tr><th>Compton wavelength &#x3BB;</th><th>Mediator mass m<sub>&#x3D5;</sub></th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>1 mm</td><td>&#x2248; 0.2 meV</td><td>Constrained by E&#xF6;t-Wash</td></tr>
+      <tr><td>10 &#x3BC;m</td><td>&#x2248; 20 meV</td><td>Near current frontier</td></tr>
+      <tr><td>1 &#x3BC;m</td><td>&#x2248; 0.2 eV</td><td>Weakly constrained</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.9rem; color:var(--ink-muted);"><em>Representative published limits &#x2014; verify current values before your report.</em></p>
+
+  <h2>Experimental Programme</h2>
+  <h3>Measurements</h3>
+  <ol>
+    <li>Determine the torsion constant &#x3BA; by measuring the free oscillation period of the pendulum.</li>
+    <li>Record the equilibrium deflection for at least three distinct source-mass configurations.</li>
+    <li>Extract <em>G</em> from each configuration independently.</li>
+    <li>Identify and quantify at least five systematic effects (see below).</li>
+  </ol>
+
+  <h3>Synthetic Data Exercise: Discovery vs Exclusion</h3>
+  <p>In addition to your real measurement, you receive a synthetic dataset with an embedded Yukawa signal at &#x3BB; = 0.1 m and &#x3B1; = 10&#x207B;&#x2074; &#x2014; below current published limits but above laboratory noise. You should:</p>
+  <ol>
+    <li>Fit the synthetic data under two hypotheses: pure Newton and Newton+Yukawa.</li>
+    <li>Compute the likelihood ratio &#x39B; = L(Newton) / L(Newton+Yukawa).</li>
+    <li>Determine whether the data prefer the extended model at &#x2265; 2&#x3C3; significance.</li>
+    <li>Extract best-fit &#x3B1; and &#x3BB; with uncertainties, and discuss degeneracy between <em>G</em> and &#x3B1;.</li>
+  </ol>
+  <div class="box box-note">
+    <div class="box-label">Why this matters</div>
+    <p style="margin-bottom:0">If you only perform null-result exclusion analyses, you learn only half of precision physics. The synthetic discovery exercise forces engagement with model selection, parameter degeneracy, and the difference between setting limits and claiming a signal.</p>
+  </div>
+
+  <h2>Numerical Programme</h2>
+  <h3>Simulation Tasks</h3>
+  <ol>
+    <li>Implement V(r) with both Newtonian and Yukawa components.</li>
+    <li>Compute the expected torque signal as a function of &#x3BB; for the laboratory mass geometry.</li>
+    <li>Generate an exclusion curve in (&#x3B1;, &#x3BB;) space from the real measurement uncertainty.</li>
+    <li>Overlay published E&#xF6;t-Wash limits and identify regions where your measurement is competitive or not.</li>
+  </ol>
+  <h3>Model Comparison Extension</h3>
+  <p>Implement at least two distinct deviation models and show where their exclusion contours diverge. Suggested pair: standard Yukawa (massive scalar) vs power-law modification V(r) &#x221D; 1/r<sup>1+&#x3B5;</sup>, inspired by extra-dimensional scenarios. This demonstrates that exclusion limits are model-dependent.</p>
+
+  <h2>Statistical and Systematic Effects</h2>
+  <p>Understanding and quantifying uncertainties is central to this lab. The skills developed here carry directly into the report and seminar.</p>
+  <h3>Statistical Uncertainties</h3>
+  <ul>
+    <li>Propagate all measurement uncertainties through to <em>G</em> using both analytic error propagation and Monte Carlo sampling.</li>
+    <li>Report the full covariance matrix for fitted parameters (<em>G</em>, &#x3BA;, geometric factors).</li>
+    <li>For the synthetic data: report &#x39B;, the corresponding p-value, and the confidence interval on &#x3B1;.</li>
+    <li>For exclusion curves: construct 95% CL contours using Feldman&#x2013;Cousins or profile likelihood.</li>
+  </ul>
+  <h3>Systematic Uncertainties</h3>
+  <p>Identify, estimate, and tabulate the following:</p>
+  <table>
+    <thead><tr><th>Systematic Effect</th><th>Estimation Method</th><th>Typical Magnitude</th></tr></thead>
+    <tbody>
+      <tr><td>Fibre anelasticity</td><td>Time-series analysis of drift</td><td>~0.1&#x2013;1% on &#x3BA;</td></tr>
+      <tr><td>Gravitational coupling to laboratory masses</td><td>FEA or analytic calculation of parasitic masses</td><td>Configuration-dependent</td></tr>
+      <tr><td>Temperature drift</td><td>Correlation analysis: &#x3B8; vs T<sub>ambient</sub></td><td>~10 ppm/K on <em>G</em></td></tr>
+      <tr><td>Electrostatic and magnetic backgrounds</td><td>Shielding test or polarity reversal</td><td>Must demonstrate &lt; 1% of signal</td></tr>
+      <tr><td>Mass metrology (density inhomogeneity)</td><td>Cross-check mass vs geometric prediction</td><td>~0.01&#x2013;0.1% on <em>m</em></td></tr>
+      <tr><td>Finite-size corrections</td><td>Numerical integration over extended geometry</td><td>Geometry-dependent; must compute</td></tr>
+      <tr><td>Seismic and acoustic coupling</td><td>PSD of pendulum at quiet vs noisy times</td><td>Must be below thermal noise</td></tr>
+    </tbody>
+  </table>
+  <p>Your lab notes should include a complete uncertainty budget table listing each systematic, its estimated magnitude, and how it was determined. State whether your measurement is statistically or systematically limited.</p>
+
+  <h2>Lab Notes</h2>
+  <p>Your lab notes for this experiment should include: raw data, &#x3BA; determination, <em>G</em> extraction for each configuration, uncertainty budget table, exclusion curve in (&#x3B1;, &#x3BB;) space, and likelihood-ratio analysis of synthetic data. These feed directly into your report and the unified exclusion plot in <a href="lab4.html">Lab 4</a>.</p>
+  <div class="repo-link">lab1-gravity/ &#x2192; <a href="#">notebook_template.ipynb</a> &#xB7; <a href="#">synthetic_yukawa_signal.csv</a></div>
+</main>
+<footer><a href="index.html">FP Capstone</a> &#xB7; Physikalisches Institut &#xB7; Universit&#xE4;t Freiburg &#xB7; Draft v0.1</footer>
+</body>
+</html>

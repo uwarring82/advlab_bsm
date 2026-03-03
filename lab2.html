@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 2: Positronium HFS — FP Capstone</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-home">FP Capstone</a>
+    <div class="nav-links">
+      <a href="index.html">Overview</a>
+      <a href="framework.html">Framework</a>
+      <a href="lab1.html">Lab 1: Gravity</a>
+      <a href="lab2.html" class="active">Lab 2: Positronium</a>
+      <a href="lab3.html">Lab 3: Z&#x2070;</a>
+      <a href="lab4.html">Lab 4: Synthesis</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="page-header">
+    <h1>Lab 2: Positronium Hyperfine Splitting and BSM Contact Corrections<span class="subtitle">Bound-state limit of the mediator propagator</span></h1>
+    <div class="meta"><span>Mode: Numerical + Theory</span><span>Regime: |q| ~ &#x3B1;m<sub>e</sub> &#x226A; m<sub>&#x3D5;</sub></span></div>
+    <div class="endorsement">Learning phase &#x2014; formative feedback only</div>
+  </div>
+
+  <h2>Learning Objectives</h2>
+  <ol>
+    <li>Calculate the QED prediction for positronium ground-state HFS to leading order.</li>
+    <li>Derive the BSM correction &#x3B4;(&#x394;E) &#x221D; (g&#xB2;/m<sub>&#x3D5;</sub>&#xB2;)|&#x3C8;(0)|&#xB2; from the propagator in the bound-state limit.</li>
+    <li>Compare the theoretical prediction with published experimental values.</li>
+    <li>Extract constraints on g&#xB2;/m<sub>&#x3D5;</sub>&#xB2; from the current theory&#x2013;experiment discrepancy.</li>
+    <li>Quantify theoretical and experimental uncertainties and their propagation into BSM limits.</li>
+  </ol>
+
+  <h2>Three-Step Protocol</h2>
+  <table>
+    <thead><tr><th>Step</th><th>For this lab</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Entrance Session</strong></td><td>Present the positronium HFS physics, the connection to |&#x3C8;(0)|&#xB2;, and how the EFT contact operator arises from the same propagator as Lab 1. Explain the theory&#x2013;experiment comparison strategy.</td></tr>
+      <tr><td><strong>Active Lab</strong></td><td>Work through the numerical programme: compute the wavefunction at the origin, evaluate &#x394;E<sub>hfs</sub>, derive the BSM correction, and construct exclusion contours. Estimate orders of magnitude as you go.</td></tr>
+      <tr><td><strong>Findings Session</strong></td><td>Present your exclusion contour in (g, m<sub>&#x3D5;</sub>) space, the error budget, and the sensitivity analysis. Discuss whether the constraint is theory-limited or experiment-limited.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Background</h2>
+  <h3>Positronium Ground-State HFS</h3>
+  <p>The ground-state hyperfine splitting arises from the spin-spin interaction of the electron-positron pair at zero separation. The leading-order QED result is:</p>
+  <div class="equation">&#x394;E<sub>hfs</sub> = (7/12) &#x3B1;&#x2074; m<sub>e</sub> c&#xB2;</div>
+  <p>Higher-order QED corrections bring the prediction to approximately 203.391 GHz. The experimental value is approximately 203.389 GHz, with both uncertainties at the ~1 MHz level. Reproduce the leading-order result and understand the structure of the first radiative correction (order &#x3B1;&#x2075;) without deriving it.</p>
+  <p style="font-size:0.9rem; color:var(--ink-muted);"><em>Representative values &#x2014; verify current values before your report.</em></p>
+
+  <h3>BSM Correction from a New Scalar Mediator</h3>
+  <p>A new scalar mediator coupling to electrons with strength <em>g</em> modifies the contact interaction. The propagator evaluated at bound-state momentum transfer q ~ &#x3B1;<sub>em</sub> m<sub>e</sub> reduces to &#x2212;1/m<sub>&#x3D5;</sub>&#xB2; when m<sub>&#x3D5;</sub> &#x226B; &#x3B1;<sub>em</sub> m<sub>e</sub>. The resulting local operator modifies only |&#x3C8;(0)|&#xB2; terms &#x2014; only S-wave states are affected:</p>
+  <div class="equation">&#x3B4;(&#x394;E) ~ (g&#xB2;/m<sub>&#x3D5;</sub>&#xB2;) &#xB7; m<sub>e</sub>&#xB3; &#x3B1;<sub>em</sub>&#xB3;</div>
+  <p>See <a href="framework.html">Framework, &#xA7;3</a> for the full derivation scaffold.</p>
+  <div class="box box-note">
+    <div class="box-label">Conceptual bridge</div>
+    <p style="margin-bottom:0">This is the same propagator as in Lab 1, evaluated in a different kinematic regime. In Lab 1, |q| &#x226A; m<sub>&#x3D5;</sub> gives a Yukawa tail. Here, |q| ~ &#x3B1;<sub>em</sub> m<sub>e</sub> &#x226A; m<sub>&#x3D5;</sub> gives a contact operator. Verify explicitly that both limits emerge from expanding M(q) in the same small parameter q&#xB2;/m<sub>&#x3D5;</sub>&#xB2;.</p>
+  </div>
+
+  <h2>Numerical Programme</h2>
+  <ol>
+    <li>Compute the positronium ground-state wavefunction at the origin from the Coulomb solution.</li>
+    <li>Evaluate &#x394;E<sub>hfs</sub> at leading order and compare with the known QED result.</li>
+    <li>Compute &#x3B4;(&#x394;E) as a function of m<sub>&#x3D5;</sub> and <em>g</em> for a scalar mediator.</li>
+    <li>Using the current &#x394;E<sub>theory</sub> &#x2212; &#x394;E<sub>expt</sub> discrepancy as an upper bound, derive exclusion contours in (g, m<sub>&#x3D5;</sub>) space.</li>
+    <li>Place these contours on the same parameter plane as the Lab 1 Yukawa results (after appropriate axis mapping).</li>
+  </ol>
+
+  <h2>Statistical and Systematic Effects</h2>
+  <h3>Error Budget</h3>
+  <p>The BSM constraint comes from the difference between theory and experiment:</p>
+  <div class="equation">|&#x3B4;(&#x394;E)<sub>BSM</sub>| &lt; |&#x394;E<sub>theory</sub> &#x2212; &#x394;E<sub>expt</sub>| + k &#xB7; &#x3C3;<sub>combined</sub></div>
+  <p>where &#x3C3;<sub>combined</sub> includes:</p>
+  <table>
+    <thead><tr><th>Uncertainty Source</th><th>Origin</th><th>Treatment</th></tr></thead>
+    <tbody>
+      <tr><td>QED theory truncation</td><td>Unknown higher-order &#x3B1; corrections</td><td>Estimate from last known term; assign as systematic</td></tr>
+      <tr><td>Experimental statistical uncertainty</td><td>Finite measurement precision</td><td>Propagate directly</td></tr>
+      <tr><td>Experimental systematic</td><td>Apparatus limitations</td><td>Taken from published error budget</td></tr>
+      <tr><td>Hadronic vacuum polarisation</td><td>Non-perturbative QCD</td><td>Assign systematic from literature range</td></tr>
+    </tbody>
+  </table>
+  <p>Your lab notes should include an uncertainty decomposition table separating theoretical systematics from experimental uncertainties. State whether the BSM constraint is theory-limited or experiment-limited.</p>
+
+  <h3>Sensitivity Analysis</h3>
+  <p>Produce a sensitivity curve showing how the exclusion contour in (g, m<sub>&#x3D5;</sub>) space shifts as &#x3C3;<sub>combined</sub> is varied by factors of 0.5, 1, 2, and 5. This reveals which improvement &#x2014; theory or experiment &#x2014; would have the greatest impact on BSM reach.</p>
+
+  <h2>Lab Notes</h2>
+  <p>Your analysis notes should contain: leading-order HFS derivation, BSM correction calculation, exclusion contour in (g, m<sub>&#x3D5;</sub>) space, full error budget, and sensitivity analysis. These feed into your report and the unified exclusion plot in <a href="lab4.html">Lab 4</a>.</p>
+  <div class="repo-link">lab2-positronium/ &#x2192; <a href="#">notebook_template.ipynb</a> &#xB7; <a href="#">hfs_published_values.csv</a></div>
+</main>
+<footer><a href="index.html">FP Capstone</a> &#xB7; Physikalisches Institut &#xB7; Universit&#xE4;t Freiburg &#xB7; Draft v0.1</footer>
+</body>
+</html>

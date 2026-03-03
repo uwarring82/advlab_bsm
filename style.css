@@ -1,0 +1,407 @@
+/* ═══════════════════════════════════════════════════════════════
+   FP Capstone — One Propagator, Three Regimes
+   Academic site stylesheet
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  --ink: #1a1a2e;
+  --ink-light: #3a3a5e;
+  --ink-muted: #6b6b8d;
+  --bg: #faf9f7;
+  --bg-warm: #f4f1ec;
+  --bg-code: #f0ede6;
+  --accent: #8b2500;
+  --accent-light: #c44d2a;
+  --border: #d4d0c8;
+  --border-light: #e8e4dc;
+  --nav-bg: #1a1a2e;
+  --nav-text: #d4d0c8;
+  --nav-active: #faf9f7;
+  --table-header: #2a2a4e;
+  --table-alt: #f4f1ec;
+  --guardian: #6b3a2e;
+  --guardian-bg: #fdf6f0;
+  --guardian-border: #d4a68c;
+  --note-bg: #f0f4f8;
+  --note-border: #8ca8c4;
+  --max-w: 52rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 17px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Navigation ──────────────────────────────────────────────── */
+
+nav {
+  background: var(--nav-bg);
+  border-bottom: 3px solid var(--accent);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav .nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+nav .nav-home {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nav-text);
+  text-decoration: none;
+  padding: 0.9rem 1.2rem 0.9rem 0;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+nav .nav-home:hover { color: var(--nav-active); }
+
+nav .nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0;
+  overflow-x: auto;
+}
+
+nav .nav-links a {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--nav-text);
+  text-decoration: none;
+  padding: 0.9rem 1rem;
+  display: block;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+nav .nav-links a:hover {
+  color: var(--nav-active);
+  border-bottom-color: rgba(255,255,255,0.3);
+}
+
+nav .nav-links a.active {
+  color: var(--nav-active);
+  border-bottom-color: var(--accent-light);
+  font-weight: 600;
+}
+
+/* ── Main Content ────────────────────────────────────────────── */
+
+main {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+/* ── Typography ──────────────────────────────────────────────── */
+
+h1 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
+}
+
+h1 .subtitle {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  margin-top: 0.4rem;
+  line-height: 1.5;
+}
+
+h2 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 2.5rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink-light);
+  margin-top: 1.8rem;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+p { margin-bottom: 1rem; }
+
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+a:hover { border-bottom-color: var(--accent); }
+
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+/* ── Header block ────────────────────────────────────────────── */
+
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.page-header .meta {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  margin-top: 0.8rem;
+  line-height: 1.6;
+}
+
+.page-header .meta span {
+  display: inline-block;
+  margin-right: 1.5rem;
+}
+
+.endorsement {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  background: var(--bg-warm);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.3rem 0.7rem;
+  display: inline-block;
+  margin-top: 0.6rem;
+}
+
+/* ── Equations ────────────────────────────────────────────────── */
+
+.equation {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 1.05rem;
+  text-align: center;
+  padding: 1.2rem 1.5rem;
+  margin: 1.5rem 0;
+  background: var(--bg-warm);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 3px 3px 0;
+  overflow-x: auto;
+}
+
+/* ── Tables ───────────────────────────────────────────────────── */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0 1.5rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+thead th {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--table-header);
+  color: #fff;
+  padding: 0.65rem 0.8rem;
+  text-align: left;
+}
+
+tbody td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+}
+
+tbody tr:nth-child(even) { background: var(--table-alt); }
+
+/* ── Lists ────────────────────────────────────────────────────── */
+
+ol, ul {
+  margin: 0.8rem 0 1.2rem 1.5rem;
+}
+
+li {
+  margin-bottom: 0.4rem;
+  padding-left: 0.3rem;
+}
+
+ol ol, ul ul { margin-top: 0.3rem; margin-bottom: 0.3rem; }
+
+/* ── Boxes ────────────────────────────────────────────────────── */
+
+.box {
+  padding: 1rem 1.3rem;
+  margin: 1.5rem 0;
+  border-radius: 3px;
+  font-size: 0.95rem;
+}
+
+.box-guardian {
+  background: var(--guardian-bg);
+  border-left: 3px solid var(--guardian-border);
+}
+
+.box-guardian .box-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--guardian);
+  margin-bottom: 0.4rem;
+}
+
+.box-note {
+  background: var(--note-bg);
+  border-left: 3px solid var(--note-border);
+}
+
+.box-note .box-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #3a6a8a;
+  margin-bottom: 0.4rem;
+}
+
+.box-deliverable {
+  background: #f8f5f0;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+}
+
+.box-deliverable .box-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+/* ── Cards (landing page) ────────────────────────────────────── */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.3rem 1.4rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: var(--ink);
+  display: block;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(26,26,46,0.08);
+}
+
+.card .card-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  margin-bottom: 0.4rem;
+}
+
+.card .card-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.card .card-desc {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+/* ── Repo link ────────────────────────────────────────────────── */
+
+.repo-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.6rem 1rem;
+  display: inline-block;
+  margin: 0.5rem 0;
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+
+footer {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+footer a { color: var(--ink-muted); }
+footer a:hover { color: var(--accent); }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  html { font-size: 16px; }
+  nav .nav-inner { padding: 0 1rem; }
+  nav .nav-home { padding: 0.7rem 0.8rem 0.7rem 0; font-size: 0.75rem; }
+  nav .nav-links a { padding: 0.7rem 0.7rem; font-size: 0.75rem; }
+  main { padding: 1.5rem 1rem 3rem; }
+  h1 { font-size: 1.7rem; }
+  .cards { grid-template-columns: 1fr; }
+}
