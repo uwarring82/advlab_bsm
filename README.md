@@ -30,6 +30,7 @@ Lab 4 synthesises the results into a unified exclusion plot, gap analysis, and c
 one-propagator/
 ├── index.html                  ← Landing page
 ├── framework.html              ← Theory reference (all labs)
+├── tutorial.html               ← Worked examples, textbook bridge
 ├── lab1.html                   ← Gravitational constant + Yukawa
 ├── lab2.html                   ← Positronium HFS + BSM contact
 ├── lab3.html                   ← Z⁰ resonance + invisible width
